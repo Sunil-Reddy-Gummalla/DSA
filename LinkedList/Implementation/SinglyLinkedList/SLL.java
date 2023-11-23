@@ -101,6 +101,15 @@ public class SLL {
         System.out.println("END");
     }
 
+        void display(Node node) {
+        Node temp = node;
+        while (temp != null) {
+            System.out.print(temp.val + " --> ");
+            temp = temp.next;
+        }
+        System.out.println("END");
+    }
+
     int size() {
         return size;
     }
@@ -123,8 +132,9 @@ public class SLL {
         return temp;
 
     }
-// leetcode medium
-// https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+
+    // leetcode medium
+    // https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
     public Node deleteDuplicateNodes() {
 
         Node temp = head;
@@ -134,10 +144,10 @@ public class SLL {
                 prev = prev.next;
                 temp = temp.next;
             } else {
-                while(temp.next != null && temp.val == temp.next.val) {
+                while (temp.next != null && temp.val == temp.next.val) {
                     temp.next = temp.next.next;
                 }
-                if(head.val == temp.val) {
+                if (head.val == temp.val) {
                     head = head.next;
                 }
                 prev.next = temp.next;
@@ -147,5 +157,99 @@ public class SLL {
 
         return head;
 
+    }
+
+    // LeetCode Easy
+    // https://leetcode.com/problems/reverse-linked-list/submissions/
+    public Node reverseList(Node head) {
+
+        Node reverse = null;
+        Node temp = head;
+        while (temp != null) {
+            Node newNode = new Node(temp.val);
+            if (reverse == null) {
+                reverse = newNode;
+            } else {
+
+                newNode.next = reverse;
+                reverse = newNode;
+
+            }
+            temp = temp.next;
+        }
+
+        return reverse;
+
+    }
+
+    // Trying Recursive Way
+    public Node reverseListRec(Node node) {
+    
+        if (node.next == null) {
+            return node;
+        }
+        Node reverse = null;
+        if (node != null) {
+            reverse = reverseListRec(node.next);
+        }
+        node.next = null;
+        Node temp = reverse;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = node;
+
+        return reverse;
+
+    }
+
+    // Leetcode Medium
+    // https://leetcode.com/problems/remove-nodes-from-linked-list/submissions/
+    // Note: I have used Hint
+    // Think in Reverse
+    public Node removeNodes(Node head) {
+
+        head = reverseList(head);
+        Node temp = head;
+        while (temp != null && temp.next != null) {
+            if (temp.val > temp.next.val) {
+                temp.next = temp.next.next;
+            } else {
+                temp = temp.next;
+            }
+        }
+        return reverseList(head);
+    }
+
+    //Leetcode Easy 
+    //Merge Two Sorted Linked Lists
+    //https://leetcode.com/problems/merge-two-sorted-lists/
+    public Node mergeTwoLists(Node list1, Node list2) {
+
+        Node ans = new Node(0);
+        Node temp = ans;
+
+        while(list1 != null && list2 != null) {
+            if(list1.val < list2.val) {
+                temp.next = list1;
+                list1 = list1.next;
+
+            } else {
+                temp.next = list2;
+                list2 = list2.next;
+            }
+            temp = temp.next;
+        }
+
+        if(list1 == null) {
+            temp.next = list2;
+        }
+
+                if(list2 == null) {
+            temp.next = list1;
+        }
+
+        return ans.next;
+        
     }
 }
