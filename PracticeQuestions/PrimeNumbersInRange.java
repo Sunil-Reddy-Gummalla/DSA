@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class PrimeNumbersInRange {
 
     public static void main(String[] args) {
-        int[] numbers = {0,0,3,4};
-        int[] arr = twoSum(numbers, 0);
+        int[] numbers = {0,1,3,4};
+        int[] arr = twoSum(numbers, 1);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -38,9 +38,9 @@ public class PrimeNumbersInRange {
         for (int i = 0; i < numbers.length; i++) {
             int rTarget = target - numbers[i];
             int targetIndex = search(numbers, i, numbers.length, rTarget);
-            if (targetIndex != i && targetIndex >= 0) {
-                ans[0] = i + 1;
-                ans[1] = targetIndex + 1;
+            if (targetIndex >= 0) {
+                ans[0] = i;
+                ans[1] = targetIndex;
                 return ans;
             }
         }
