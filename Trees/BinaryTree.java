@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 class BinaryTree {
 
     public BinaryTree() {
@@ -10,16 +9,6 @@ class BinaryTree {
         BinaryTree tree = new BinaryTree();
         tree.populate(scanner);
         tree.prettyDisplay();       
-    }
-
-    public static class Node {
-        int value;
-        Node left;
-        Node right;
-
-        public Node(int value) {
-            this.value = value;
-        }
     }
 
     private Node root;
@@ -82,5 +71,9 @@ class BinaryTree {
       System.out.println(node.value);
     }
     prettyDisplay(node.left, level + 1);
+  }
+
+  public Node getRoot() {
+      return root;
   }
 }
